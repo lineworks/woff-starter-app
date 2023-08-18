@@ -1,0 +1,15 @@
+version: "3.0"
+
+services:
+  workspace:
+    image: node:16
+    tty: true
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "9000:9000"
+    environment:
+      - WOFF_ID
+      - 'PS1=[\u@\h \W] \$$ '
+    command: /bin/bash -c "bash"
