@@ -7,7 +7,7 @@ WOFFスターターアプリは、WOFFの機能を試すことができるサン
 ## Samples
 
 | sample | description |
-|---|---|---|
+|---|---|
 | [vanilla](/samples/vanilla) | Made with no frameworks |
 
 ## Question / Issue / Requests

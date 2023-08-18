@@ -10,7 +10,7 @@ WOFF Starter app is a sample to try and touch WOFF features.
 ## Samples
 
 | sample | description |
-|---|---|---|
+|---|---|
 | [vanilla](/samples/vanilla) | Made with no frameworks |
 
 ## Question / Issue / Requests
