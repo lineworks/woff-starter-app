@@ -20,7 +20,6 @@ const displayWoffData = () => {
     document.getElementById('deviceOS').textContent = woff.getOS();
 
     var context = woff.getContext();
-    console.log(context)
     document.getElementById('viewType').textContent = context.viewType;
     document.getElementById('endpointUrl').textContent = context.endpointUrl;
     document.getElementById('permanentLinkPattern').textContent = context.permanentLinkPattern;
@@ -39,6 +38,7 @@ const displayWoffData = () => {
 const registerButtonHandlers = () => {
     // openWindow call
     document.getElementById('openWindowButton').addEventListener('click', () => {
+        console.log("open window");
         woff.openWindow({
             url: 'https://line.worksmobile.com/',
             external: true
@@ -50,6 +50,7 @@ const registerButtonHandlers = () => {
         if (!woff.isInClient()) {
             sendAlertIfNotInClient();
         } else {
+            console.log("close window");
             woff.closeWindow();
         }
     });
@@ -66,7 +67,7 @@ const registerButtonHandlers = () => {
                 console.log("message sent: " + msg)
                 window.alert('Message sent');
             }).catch((error) => {
-                console.log(error)
+                console.error(error)
                 window.alert('Error sending message: ' + error);
             });
         }
@@ -78,7 +79,6 @@ const registerButtonHandlers = () => {
             sendAlertIfNotInClient();
         } else {
             let msg = {
-              "content": {
                 "type": "flex",
                 "altText": "this is a flexible template",
                 "contents": {
@@ -98,7 +98,6 @@ const registerButtonHandlers = () => {
                     ]
                   }
                 }
-              }
             }
 
             woff.sendFlexMessage({
@@ -107,7 +106,7 @@ const registerButtonHandlers = () => {
                 console.log("flex message sent: " + msg)
                 window.alert('Message sent');
             }).catch((error) => {
-                console.log(error)
+                console.error(error)
                 window.alert('Error sending message: ' + error);
             });
         }
@@ -118,6 +117,7 @@ const registerButtonHandlers = () => {
         if (!woff.isLoggedIn() && !woff.isInClient()) {
             alert('To get an access token, you need to be logged in. Please tap the "login" button below and try again.');
         } else {
+            console.log("Get access token");
             const accessToken = woff.getAccessToken();
             document.getElementById('accessTokenField').textContent = accessToken;
         }
@@ -125,13 +125,13 @@ const registerButtonHandlers = () => {
 
     // get profile call
     document.getElementById('getProfileButton').addEventListener('click', () => {
+        console.log("Get profile");
         woff.getProfile().then((profile) => {
-            console.log(profile)
             document.getElementById('domainIdField').textContent = profile.domainId;
             document.getElementById('userIdProfileField').textContent = profile.userId;
             document.getElementById('displayNameField').textContent = profile.displayName;
         }).catch((error) => {
-            console.log(error)
+            console.error(error)
             window.alert('Error getting profile: ' + error);
         });
     });
@@ -139,6 +139,7 @@ const registerButtonHandlers = () => {
     // login call, only when external browser is used
     document.getElementById('woffLoginButton').addEventListener('click', () => {
         if (!woff.isLoggedIn()) {
+            console.log("Login");
             // set `redirectUri` to redirect the user to a URL other than the front page of your WOFF app.
             woff.login();
         }
@@ -154,12 +155,11 @@ const registerButtonHandlers = () => {
 
     // scan QR
     document.getElementById('scanQrButton').addEventListener('click', () => {
+        console.log("Scan QR");
         woff.scanQR().then((result) => {
-            console.log(result)
-            console.log(result.value)
             document.getElementById('scanQrResult').textContent = result.value;
         }).catch((error) => {
-            console.log(error)
+            console.error(error)
             window.alert('Error scanning QR: ' + error);
         });
     });
@@ -190,18 +190,17 @@ const initializeWoff = (myWoffId) => {
             woffId: myWoffId
         })
         .then(() => {
-            console.log(woff)
             // start to use WOFF's api
             initializeApp();
         })
         .catch((err) => {
-            console.log(err)
+            console.error(err)
             document.getElementById("woffInitErrorMessage").hidden = false;
         });
 }
 
 // On load
 window.addEventListener('load', () => {
-    console.log(woffId);
+    console.log('WOFF_ID: ' + woffId);
     initializeWoff(woffId);
 });
