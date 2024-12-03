@@ -20,10 +20,11 @@ const displayWoffData = () => {
     document.getElementById('deviceOS').textContent = woff.getOS();
 
     var context = woff.getContext();
+    console.log(context)
     document.getElementById('viewType').textContent = context.viewType;
     document.getElementById('endpointUrl').textContent = context.endpointUrl;
-    document.getElementById('permanentLinkPattern').textContent = context.permanentLinkPattern;
     document.getElementById('clientId').textContent = context.clientId;
+    document.getElementById('clientType').textContent = context.clientType;
 
     if (woff.isInClient()) {
         document.getElementById('isInClientMessage').textContent = 'Opening the app in the in-app browser of LINE WORKS.';
