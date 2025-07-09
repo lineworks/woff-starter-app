@@ -137,6 +137,18 @@ const registerButtonHandlers = () => {
         });
     });
 
+    // get channel Id
+    document.getElementById('getChannelIdButton').addEventListener('click', () => {
+        console.log("Get channel id");
+        woff.getChannelId().then((channelId) => {
+            console.log(channelId);
+            document.getElementById('channelIdField').textContent = channelId;
+        }).catch((error) => {
+            console.error(error)
+            window.alert('Error getting channel Id: ' + error);
+        });
+    });
+
     // login call, only when external browser is used
     document.getElementById('woffLoginButton').addEventListener('click', () => {
         if (!woff.isLoggedIn()) {
